@@ -4,7 +4,9 @@ require 'user_agent_parser'
 module UAParser
   class Parser
     def initialize
-      @ua_parser = UserAgentParser::Parser.new
+      @ua_parser = UserAgentParser::Parser.new(
+        patterns_path: File.expand_path('us_parser_regexes_2_18_0.yaml', __dir__)
+      )
     end
 
     def parse_os(*args)
