@@ -960,7 +960,7 @@ module Statsig
       is_multi_pass_gate_type = condition_type == Const::CND_MULTI_PASS_GATE
       gate_names.each { |gate_name|
         result = eval_nested_gate(gate_name, user, end_result)
-        if end_result.sampling_rate == nil && !target.start_with?("segment")
+        if end_result.sampling_rate == nil && !gate_name.to_s.start_with?("segment")
           end_result.has_seen_analytical_gates = true
         end
         if is_multi_pass_gate_type == result

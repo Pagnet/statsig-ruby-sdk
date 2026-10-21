@@ -1,0 +1,247 @@
+{
+  "dynamic_configs": {},
+  "feature_gates": {
+    "everyone": {
+      "name": "everyone",
+      "type": "feature_gate",
+      "salt": "everyone_salt",
+      "enabled": true,
+      "defaultValue": false,
+      "rules": [
+        {
+          "name": "everyoneRuleID",
+          "passPercentage": 100,
+          "conditions": [
+            "cond_public"
+          ],
+          "returnValue": true,
+          "id": "everyoneRuleID",
+          "salt": "everyoneRuleID",
+          "idType": "userID"
+        }
+      ],
+      "idType": "userID",
+      "entity": "feature_gate"
+    },
+    "none": {
+      "name": "none",
+      "type": "feature_gate",
+      "salt": "none_salt",
+      "enabled": true,
+      "defaultValue": false,
+      "rules": [],
+      "idType": "userID",
+      "entity": "feature_gate"
+    },
+    "segment:segment1": {
+      "name": "segment:segment1",
+      "type": "feature_gate",
+      "salt": "segment:segment1_salt",
+      "enabled": true,
+      "defaultValue": false,
+      "rules": [
+        {
+          "name": "segment1RuleID",
+          "passPercentage": 100,
+          "conditions": [
+            "cond_user_is_1"
+          ],
+          "returnValue": true,
+          "id": "segment1RuleID",
+          "salt": "segment1RuleID",
+          "idType": "userID"
+        }
+      ],
+      "idType": "userID",
+      "entity": "feature_gate"
+    },
+    "segment:segment2": {
+      "name": "segment:segment2",
+      "type": "feature_gate",
+      "salt": "segment:segment2_salt",
+      "enabled": true,
+      "defaultValue": false,
+      "rules": [
+        {
+          "name": "segment2RuleID",
+          "passPercentage": 100,
+          "conditions": [
+            "cond_user_is_2"
+          ],
+          "returnValue": true,
+          "id": "segment2RuleID",
+          "salt": "segment2RuleID",
+          "idType": "userID"
+        }
+      ],
+      "idType": "userID",
+      "entity": "feature_gate"
+    },
+    "multi_pass_gate_check": {
+      "name": "multi_pass_gate_check",
+      "type": "feature_gate",
+      "salt": "multi_pass_gate_check_salt",
+      "enabled": true,
+      "defaultValue": false,
+      "rules": [
+        {
+          "name": "multiPassRuleID",
+          "passPercentage": 100,
+          "conditions": [
+            "cond_pass_any_of_none_everyone"
+          ],
+          "returnValue": true,
+          "id": "multiPassRuleID",
+          "salt": "multiPassRuleID",
+          "idType": "userID"
+        }
+      ],
+      "idType": "userID",
+      "entity": "feature_gate"
+    },
+    "multi_pass_segment_check": {
+      "name": "multi_pass_segment_check",
+      "type": "feature_gate",
+      "salt": "multi_pass_segment_check_salt",
+      "enabled": true,
+      "defaultValue": false,
+      "rules": [
+        {
+          "name": "multiPassSegmentRuleID",
+          "passPercentage": 100,
+          "conditions": [
+            "cond_pass_any_segment"
+          ],
+          "returnValue": true,
+          "id": "multiPassSegmentRuleID",
+          "salt": "multiPassSegmentRuleID",
+          "idType": "userID"
+        }
+      ],
+      "idType": "userID",
+      "entity": "feature_gate"
+    },
+    "multi_fail_gate_check": {
+      "name": "multi_fail_gate_check",
+      "type": "feature_gate",
+      "salt": "multi_fail_gate_check_salt",
+      "enabled": true,
+      "defaultValue": false,
+      "rules": [
+        {
+          "name": "multiFailRuleID",
+          "passPercentage": 100,
+          "conditions": [
+            "cond_fail_any_of_everyone_none"
+          ],
+          "returnValue": true,
+          "id": "multiFailRuleID",
+          "salt": "multiFailRuleID",
+          "idType": "userID"
+        }
+      ],
+      "idType": "userID",
+      "entity": "feature_gate"
+    },
+    "multi_fail_gate_all_pass_check": {
+      "name": "multi_fail_gate_all_pass_check",
+      "type": "feature_gate",
+      "salt": "multi_fail_gate_all_pass_check_salt",
+      "enabled": true,
+      "defaultValue": false,
+      "rules": [
+        {
+          "name": "multiFailAllPassRuleID",
+          "passPercentage": 100,
+          "conditions": [
+            "cond_fail_any_of_everyone"
+          ],
+          "returnValue": true,
+          "id": "multiFailAllPassRuleID",
+          "salt": "multiFailAllPassRuleID",
+          "idType": "userID"
+        }
+      ],
+      "idType": "userID",
+      "entity": "feature_gate"
+    }
+  },
+  "layer_configs": {},
+  "condition_map": {
+    "cond_public": {
+      "type": "public",
+      "targetValue": null,
+      "operator": null,
+      "field": null,
+      "additionalValues": {},
+      "idType": "userID"
+    },
+    "cond_user_is_1": {
+      "type": "user_field",
+      "targetValue": [
+        "1"
+      ],
+      "operator": "any",
+      "field": "userID",
+      "additionalValues": {},
+      "idType": "userID"
+    },
+    "cond_user_is_2": {
+      "type": "user_field",
+      "targetValue": [
+        "2"
+      ],
+      "operator": "any",
+      "field": "userID",
+      "additionalValues": {},
+      "idType": "userID"
+    },
+    "cond_pass_any_of_none_everyone": {
+      "type": "multi_pass_gate",
+      "targetValue": [
+        "none",
+        "everyone"
+      ],
+      "operator": null,
+      "field": null,
+      "additionalValues": {},
+      "idType": "userID"
+    },
+    "cond_pass_any_segment": {
+      "type": "multi_pass_gate",
+      "targetValue": [
+        "segment:segment1",
+        "segment:segment2"
+      ],
+      "operator": null,
+      "field": null,
+      "additionalValues": {},
+      "idType": "userID"
+    },
+    "cond_fail_any_of_everyone_none": {
+      "type": "multi_fail_gate",
+      "targetValue": [
+        "everyone",
+        "none"
+      ],
+      "operator": null,
+      "field": null,
+      "additionalValues": {},
+      "idType": "userID"
+    },
+    "cond_fail_any_of_everyone": {
+      "type": "multi_fail_gate",
+      "targetValue": [
+        "everyone"
+      ],
+      "operator": null,
+      "field": null,
+      "additionalValues": {},
+      "idType": "userID"
+    }
+  },
+  "experiment_to_layer": {},
+  "id_lists": {},
+  "has_updates": true,
+  "time": 1735689600000
+}
